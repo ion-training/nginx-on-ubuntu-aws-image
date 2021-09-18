@@ -45,10 +45,12 @@ build {
   ]
 
   provisioner "shell" {
+      environment_vars = [
+        "DEBIAN_FRONTEND=noninteractive",
+  ]
     inline = [
-      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections",
-      "sudo apt-get -qq update",
-      "sudo apt-get -y install nginx > /dev/null",
+      "sudo apt-get update",
+      "sudo apt-get -y install nginx",
     ]
   }
 
